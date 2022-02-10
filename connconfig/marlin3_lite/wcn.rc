@@ -1,0 +1,27 @@
+on post-fs-data
+    insmod ${ro.vendor.ko.mount.point}/socko/sprdbt_tty.ko
+    chmod 660 /sys/class/rfkill/rfkill0/state
+    chown bluetooth net_bt_admin /sys/class/rfkill/rfkill0/state
+    chmod 660 /sys/class/rfkill/rfkill0/type
+    chown bluetooth net_bt_admin /sys/class/rfkill/rfkill0/type
+
+    insmod ${ro.vendor.ko.mount.point}/socko/sprd_fm.ko
+    mkdir /data/vendor/bluetooth 0770 bluetooth bluetooth
+
+    chmod 660 /sys/devices/platform/sprd-mtty/dumpmem
+    chown bluetooth net_bt_admin /sys/devices/platform/sprd-mtty/dumpmem
+    restorecon -R /sys/devices/platform/sprd-mtty/dumpmem
+
+on cali-fs
+    insmod ${ro.vendor.ko.mount.point}/socko/sprdbt_tty.ko
+    chmod 660 /sys/class/rfkill/rfkill0/state
+    chown bluetooth net_bt_admin /sys/class/rfkill/rfkill0/state
+    chmod 660 /sys/class/rfkill/rfkill0/type
+    chown bluetooth net_bt_admin /sys/class/rfkill/rfkill0/type
+
+    insmod ${ro.vendor.ko.mount.point}/socko/sprd_fm.ko
+    mkdir /data/vendor/bluetooth 0770 bluetooth bluetooth
+
+    chmod 660 /sys/devices/platform/wcn_bt/dumpmem
+    chown bluetooth net_bt_admin /sys/devices/platform/wcn_bt/dumpmem
+    restorecon -R /sys/devices/platform/sprd-mtty/dumpmem

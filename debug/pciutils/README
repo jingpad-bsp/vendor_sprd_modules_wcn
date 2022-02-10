@@ -1,0 +1,46 @@
+1.编译应用程序，makefile 没写好，所以GCC 直接编译
+% gcc ioctl_app.c -o b.out
+
+2. 编译驱动程序sprd.ko
+直接make
+
+3.
+sudo insmod sprd.ko   
+./b.out init
+
+./b.out bread bar=0 offset=0x198100 size=64
+
+./b.out dmalloc size=1024
+:dmalloc(1024) 0xffff8800926ea000 0x00000000926ea000 OK
+
+
+
+mread
+mwrite
+bwrite
+bread---------------./b.out bread bar=0 offset=0x198100 size=64
+init----------------./b.out init
+edma_init
+edma_deinit
+link
+push
+config
+dmalloc
+inbound
+outbound------------./b.out outbound addr=0x00000000926ea000 size=1024 run=10000
+newob
+outbound-all
+ioloop
+apb
+ahb
+cm4run
+
+//wrong
+1|root@msm8996:/system/lib/modules # lspci -m
+00:00.0 "Class 0604" "17cb" "0104" "0000" "0000"
+01:00.0 "Class 0280" "1db3" "2355" "ffff" "ffff"
+
+right
+root@msm8996:/ # lspci -m
+00:00.0 "Class 0604" "17cb" "0104" "0000" "0000"
+01:00.0 "Class 0280" "1db3" "2355" "0000" "0000"
